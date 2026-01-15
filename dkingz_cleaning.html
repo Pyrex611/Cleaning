@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D Kingz Luxury Services - Premium Cleaning Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Green color palette from the poster */
+            --primary-green: #2E8B57; /* Sea Green - Main brand color */
+            --primary-dark: #1F6B42; /* Darker green for hover states */
+            --primary-light: #3CB371; /* Medium Sea Green - for highlights */
+            --lime-green: #32CD32; /* Lime Green - for accents */
+            --forest-green: #228B22; /* Forest Green - for strong accents */
+            --mint-green: #98FB98; /* Mint Green - for light backgrounds */
+            --olive-green: #6B8E23; /* Olive Green - for complementary elements */
+            --emerald-green: #50C878; /* Emerald Green - for special highlights */
+            
+            /* Neutral colors */
+            --secondary: #0A2F1C; /* Dark green background */
+            --accent: #F8F8F8; /* Light background */
+            --accent-dark: #E8E8E8;
+            --text-dark: #333333;
+            --text-light: #FFFFFF;
+            --text-gray: #666666;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--accent);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header - Reduced Height */
+        header {
+            background-color: var(--text-light);
+            padding: 12px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            border-bottom: 3px solid var(--primary-green);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--forest-green);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            font-size: 24px;
+            color: var(--emerald-green);
+        }
+        
+        .logo-tagline {
+            font-size: 10px;
+            color: var(--text-gray);
+            margin-left: 8px;
+            font-weight: 400;
+            font-family: 'Montserrat', sans-serif;
+            border-left: 1px solid #ddd;
+            padding-left: 8px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 15px;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--forest-green);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--lime-green), var(--forest-green));
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--forest-green);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section - Green Theme */
+        .hero {
+            background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.88)), 
+                        url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.15) 0%, rgba(255, 255, 255, 0.95) 70%);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .hero h1 span {
+            background: linear-gradient(to right, var(--forest-green), var(--primary-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--mint-green), var(--lime-green));
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
+        .hero-tagline {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--olive-green);
+            margin-bottom: 15px;
+            padding-left: 10px;
+            border-left: 4px solid var(--lime-green);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--text-gray);
+            max-width: 600px;
+            background-color: rgba(248, 248, 248, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            border-left: 3px solid var(--primary-light);
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-green), var(--forest-green));
+            color: var(--text-light);
+            padding: 14px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(46, 139, 87, 0.3);
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, var(--forest-green), var(--primary-dark));
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(46, 139, 87, 0.4);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-green);
+            color: var(--text-light);
+        }
+        
+        /* Services Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        .section-title h2 span {
+            background: linear-gradient(to right, var(--forest-green), var(--olive-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, var(--lime-green), var(--primary-green));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .services {
+            padding: 80px 0;
+            background-color: var(--text-light);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--accent);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            padding: 35px 25px;
+            border-top: 4px solid;
+            border-image: linear-gradient(to right, var(--lime-green), var(--primary-green)) 1;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(46, 139, 87, 0.15);
+        }
+        
+        .service-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--emerald-green), var(--forest-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        .service-card p {
+            color: var(--text-gray);
+        }
+        
+        /* Discount Banner - Green Theme */
+        .discount-banner {
+            background: linear-gradient(90deg, var(--forest-green), var(--primary-green), var(--olive-green));
+            padding: 50px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .discount-banner::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 120%;
+            height: 120%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
+            );
+            z-index: 0;
+        }
+        
+        .discount-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .discount-banner h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--text-light);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .discount-banner p {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--accent);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .contact-info p {
+            margin-bottom: 30px;
+            color: var(--text-gray);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(to right, var(--primary-green), var(--forest-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--text-light);
+            font-size: 20px;
+        }
+        
+        .contact-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+        
+        .contact-details p, .contact-details a {
+            margin: 0;
+            color: var(--text-gray);
+            text-decoration: none;
+        }
+        
+        .contact-details a:hover {
+            color: var(--primary-green);
+        }
+        
+        .contact-form {
+            background-color: var(--text-light);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border-top: 3px solid var(--primary-light);
+        }
+        
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--accent);
+            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+        }
+        
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 2px rgba(46, 139, 87, 0.2);
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--secondary), #0A3D2A);
+            padding: 50px 0 25px;
+            color: var(--text-light);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .footer-logo span {
+            background: linear-gradient(to right, var(--emerald-green), var(--lime-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer-about p {
+            color: #cccccc;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .footer-links h4,
+        .footer-contact h4 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+            color: var(--text-light);
+        }
+        
+        .footer-links h4::after,
+        .footer-contact h4::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, var(--lime-green), var(--emerald-green));
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+        
+        .footer-links ul li a:hover {
+            color: var(--lime-green);
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: linear-gradient(to right, var(--primary-green), var(--forest-green));
+            transform: translateY(-3px);
+        }
+        
+        .footer-contact p {
+            color: #cccccc;
+            margin-bottom: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            color: var(--emerald-green);
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999999;
+            font-size: 13px;
+        }
+        
+        /* Call Now Button Special Styling */
+        .call-now-btn {
+            background: linear-gradient(to right, var(--lime-green), var(--emerald-green));
+            color: var(--secondary);
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(50, 205, 50, 0.3);
+        }
+        
+        .call-now-btn:hover {
+            background: linear-gradient(to right, var(--emerald-green), var(--lime-green));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(50, 205, 50, 0.4);
+            color: var(--secondary);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            nav {
+                width: auto;
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--text-light);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 0 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .logo-tagline {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            header {
+                padding: 10px 0;
+            }
+            
+            .logo {
+                font-size: 18px;
+            }
+            
+            .logo i {
+                font-size: 20px;
+            }
+            
+            .hero {
+                padding-top: 70px;
+                min-height: 75vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.3rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                width: 100%;
+            }
+            
+            .discount-banner h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Reduced Height -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-crown"></i> D Kingz <span>Luxury Services</span>
+                <span class="logo-tagline">Perfect Cleaning Service</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="tel:09011961624" class="call-now-btn">Call Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section - Updated with Green Theme -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>We Provide The Perfect <span>Cleaning Service</span></h1>
+                <div class="hero-tagline">Luxury Cleaning Solutions</div>
+                <p>"We do the dirty work to make you comfortable. Let's handle the stress to give you the best comfort"</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn">Get Your Free Quote</a>
+                    <a href="tel:09011961624" class="btn btn-outline">
+                        <i class="fas fa-phone-alt"></i> Call Now: 09011961624
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our <span>Services</span></h2>
+                <p>Premium cleaning solutions for every need</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Residential Cleaning</h3>
+                    <p>Complete home cleaning services to keep your living space pristine and comfortable. We handle everything from dusting to deep cleaning.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Commercial Cleaning</h3>
+                    <p>Professional cleaning for offices, retail spaces, and commercial properties. We ensure a clean, healthy environment for your business.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3>After Party Cleaning</h3>
+                    <p>Let us handle the mess after your celebration. We'll restore your space to its original condition so you can relax and enjoy the memories.</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Market Runnings</h3>
+                    <p>Need someone to handle your shopping and errands? Our professional team will take care of your market runs and other tasks efficiently.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discount Banner -->
+    <section class="discount-banner">
+        <div class="container discount-content">
+            <h2>ENJOY DISCOUNT</h2>
+            <p>First-time customers get 20% off their first cleaning service</p>
+            <a href="tel:09011961624" class="btn" style="background: linear-gradient(to right, var(--mint-green), var(--text-light)); color: var(--secondary);">Call Now to Claim</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact <span>Us</span></h2>
+                <p>Get in touch for a free quote</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>Ready to experience the D Kingz Luxury Services difference? Contact us today for a free, no-obligation quote.</p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Call Us</h4>
+                            <p><a href="tel:09011961624">09011961624</a> | <a href="tel:09060768904">09060768904</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email Us</h4>
+                            <p><a href="mailto:rnldkingz@gmail.com">rnldkingz@gmail.com</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Service Hours</h4>
+                            <p>24/7 Emergency Services Available</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="quoteForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="tel" placeholder="Your Phone" required>
+                        <select required>
+                            <option value="" disabled selected>Select Service</option>
+                            <option value="residential">Residential Cleaning</option>
+                            <option value="commercial">Commercial Cleaning</option>
+                            <option value="party">After Party Cleaning</option>
+                            <option value="market">Market Runnings</option>
+                        </select>
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Request Free Quote</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">D Kingz <span>Luxury Services</span></a>
+                    <p>"We do the dirty work to make you comfortable. Let's handle the stress to give you the best comfort"</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="tel:09011961624">Call Now</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone-alt"></i> 09011961624 | 09060768904</p>
+                    <p><i class="fas fa-envelope"></i> rnldkingz@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Serving the entire community</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 D Kingz Luxury Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    // Close mobile menu if open
+                    if(mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submission
+        const quoteForm = document.getElementById('quoteForm');
+        quoteForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your request! We will contact you shortly with your free quote.');
+            quoteForm.reset();
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if(window.scrollY > 50) {
+                header.style.padding = '8px 0';
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+            } else {
+                header.style.padding = '12px 0';
+                header.style.boxShadow = 'var(--shadow)';
+            }
+        });
+    </script>
+</body>
+</html>
