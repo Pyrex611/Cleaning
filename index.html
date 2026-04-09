@@ -62,7 +62,7 @@
         /* Fixed Container Constraint */
         .app-container {
             width: 100%;
-            max-width: 430px; /* Fixed from max-w */
+            max-width: 430px;
             margin: 0 auto;
             background-color: #f8f9fa;
             min-height: 100vh;
@@ -71,13 +71,17 @@
             overflow-x: hidden;
         }
 
-        /* Hide Number Input Spinners for Native Feel */
+        /* Hide Number Input Spinners */
         input[type="number"]::-webkit-inner-spin-button, 
         input[type="number"]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
             margin: 0; 
         }
         input[type="number"] { -moz-appearance: textfield; }
+
+        /* Accordion transition for FAQ */
+        .faq-content { transition: max-height 0.3s ease-in-out, padding 0.3s ease; max-height: 0; overflow: hidden; }
+        .faq-content.open { max-height: 200px; padding-bottom: 12px; }
     </style>
 </head>
 <body class="text-gray-800 antialiased flex justify-center">
@@ -95,31 +99,26 @@
                 <div class="px-6 -mt-16 flex-1 pb-10">
                     <div class="bg-white rounded-3xl shadow-xl p-7 relative z-10">
                         <form id="login-form" onsubmit="handleLogin(event)">
-                            
-                            <!-- Error Message Container -->
                             <div id="login-error" class="hidden bg-red-50 text-brandRed text-xs font-bold p-3 rounded-lg mb-4 text-center border border-red-100">
                                 Invalid email or password.
                             </div>
-
                             <!-- Email Input -->
                             <div class="mb-5 relative">
                                 <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Email Address</label>
                                 <div class="relative flex items-center">
                                     <i class="ph ph-envelope-simple absolute left-4 text-gray-500 text-lg"></i>
-                                    <input type="email" id="login-email" value="zeusberry2@gmail.com" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" required>
+                                    <input type="email" id="login-email" value="zeusberry2@gmail.com" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
                                 </div>
                             </div>
-
                             <!-- Password Input -->
                             <div class="mb-5 relative">
                                 <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Password</label>
                                 <div class="relative flex items-center">
                                     <i class="ph ph-lock-key absolute left-4 text-gray-400 text-lg"></i>
-                                    <input type="password" id="login-password" value="password123" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" required>
+                                    <input type="password" id="login-password" value="password123" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
                                     <i class="ph ph-eye-slash absolute right-4 text-gray-400 text-lg cursor-pointer" onclick="togglePassword('login-password')"></i>
                                 </div>
                             </div>
-
                             <!-- Remember & Forgot -->
                             <div class="flex items-center justify-between mb-8">
                                 <label class="flex items-center space-x-2 cursor-pointer">
@@ -128,13 +127,10 @@
                                 </label>
                                 <a href="#" class="text-xs font-bold text-brandRed hover:underline">Forgot Password?</a>
                             </div>
-
-                            <!-- Login Button -->
                             <button type="submit" id="login-btn" class="w-full bg-primary text-white font-bold rounded-xl py-4 text-sm shadow-lg hover:opacity-95 transition-all flex justify-center items-center">
                                 <span>Log In</span>
                                 <i class="ph ph-spinner animate-spin text-xl hidden ml-2" id="login-spinner"></i>
                             </button>
-                            
                             <p class="text-center mt-6 text-xs text-gray-500 font-medium">
                                 Don't have an account? <span onclick="navigate('signup')" class="text-brandRed font-bold hover:underline ml-1 cursor-pointer">Sign Up</span>
                             </p>
@@ -155,43 +151,33 @@
                 <div class="px-6 -mt-16 flex-1 pb-10">
                     <div class="bg-white rounded-3xl shadow-xl p-7 relative z-10">
                         <form id="signup-form" onsubmit="handleSignup(event)">
-                            
                             <div id="signup-error" class="hidden bg-red-50 text-brandRed text-xs font-bold p-3 rounded-lg mb-4 text-center border border-red-100"></div>
-
-                            <!-- Name Input -->
                             <div class="mb-5 relative">
                                 <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Full Name</label>
                                 <div class="relative flex items-center">
                                     <i class="ph ph-user absolute left-4 text-gray-500 text-lg"></i>
-                                    <input type="text" id="signup-name" placeholder="John Doe" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" required>
+                                    <input type="text" id="signup-name" placeholder="John Doe" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
                                 </div>
                             </div>
-
-                            <!-- Email Input -->
                             <div class="mb-5 relative">
                                 <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Email Address</label>
                                 <div class="relative flex items-center">
                                     <i class="ph ph-envelope-simple absolute left-4 text-gray-500 text-lg"></i>
-                                    <input type="email" id="signup-email" placeholder="email@example.com" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" required>
+                                    <input type="email" id="signup-email" placeholder="email@example.com" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
                                 </div>
                             </div>
-
-                            <!-- Password Input -->
                             <div class="mb-8 relative">
                                 <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Password</label>
                                 <div class="relative flex items-center">
                                     <i class="ph ph-lock-key absolute left-4 text-gray-400 text-lg"></i>
-                                    <input type="password" id="signup-password" placeholder="Create a password" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all" required minlength="6">
+                                    <input type="password" id="signup-password" placeholder="Create a password" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required minlength="6">
                                     <i class="ph ph-eye-slash absolute right-4 text-gray-400 text-lg cursor-pointer" onclick="togglePassword('signup-password')"></i>
                                 </div>
                             </div>
-
-                            <!-- Signup Button -->
                             <button type="submit" id="signup-btn" class="w-full bg-primary text-white font-bold rounded-xl py-4 text-sm shadow-lg hover:opacity-95 transition-all flex justify-center items-center">
                                 <span>Sign Up</span>
                                 <i class="ph ph-spinner animate-spin text-xl hidden ml-2" id="signup-spinner"></i>
                             </button>
-                            
                             <p class="text-center mt-6 text-xs text-gray-500 font-medium">
                                 Already have an account? <span onclick="navigate('login')" class="text-brandRed font-bold hover:underline ml-1 cursor-pointer">Log In</span>
                             </p>
@@ -239,32 +225,32 @@
                 <!-- Action Grid -->
                 <div class="px-6 mb-8">
                     <div class="grid grid-cols-4 gap-y-6 gap-x-2">
-                        <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <div onclick="navigate('buycode')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
                             <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-2 border border-gray-100 text-primary">
                                 <i class="ph ph-qr-code text-2xl"></i>
                             </div>
                             <span class="text-[10px] font-bold text-gray-700">Buy CODE</span>
                         </div>
-                        <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <div onclick="navigate('deposit')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
                             <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-2 border border-gray-100 text-primary">
                                 <i class="ph ph-arrow-down text-2xl"></i>
                             </div>
                             <span class="text-[10px] font-bold text-gray-700">Deposit</span>
                         </div>
-                        <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <div onclick="navigate('transfer')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
                             <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-2 border border-gray-100 text-primary">
                                 <i class="ph ph-arrow-up text-2xl"></i>
                             </div>
                             <span class="text-[10px] font-bold text-gray-700">Withdraw</span>
                         </div>
-                        <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <div onclick="navigate('history')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
                             <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-2 border border-gray-100 text-primary">
                                 <i class="ph ph-clock-counter-clockwise text-2xl"></i>
                             </div>
                             <span class="text-[10px] font-bold text-gray-700">History</span>
                         </div>
                         
-                        <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <div onclick="navigate('support')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
                             <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-2 border border-gray-100 text-primary">
                                 <i class="ph ph-headset text-2xl"></i>
                             </div>
@@ -276,7 +262,7 @@
                             </div>
                             <span class="text-[10px] font-bold text-gray-700">Community</span>
                         </div>
-                        <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <div onclick="navigate('earn')" class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
                             <div class="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-2 border border-gray-100 text-primary">
                                 <i class="ph ph-wallet text-2xl"></i>
                             </div>
@@ -305,10 +291,401 @@
             </div>
         </div>
 
+        <!-- ==================== BUY ID CODE VIEW ==================== -->
+        <div id="view-buycode" class="view-section">
+            <div class="min-h-screen bg-bgLight pb-10">
+                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
+                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
+                        <i class="ph ph-arrow-left text-xl font-bold"></i>
+                    </button>
+                    <h1 class="text-lg font-bold flex-1 text-center pr-8">Buy ID CODE</h1>
+                </div>
+
+                <div class="px-5 mt-6">
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 text-center mb-6">
+                        <div class="w-12 h-12 bg-red-50 text-brandRed rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="ph-fill ph-wrench text-2xl"></i>
+                        </div>
+                        <h2 class="text-sm font-bold text-gray-800 mb-2">Manual Processing</h2>
+                        <p class="text-[11px] text-gray-500 font-medium leading-relaxed">
+                            Due to ongoing system upgrades, automated deposits are temporarily unavailable. Please proceed to purchase your ID CODE securely via our manual processing agents below.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <!-- Telegram Agent -->
+                        <div onclick="window.open('https://t.me/Amelia75506', '_blank')" class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-[#0088cc] bg-opacity-10 text-[#0088cc] rounded-full flex items-center justify-center">
+                                    <i class="fa-brands fa-telegram text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800">Telegram Agent</h3>
+                                    <p class="text-[10px] text-gray-500 font-medium">@matildesimes3114</p>
+                                </div>
+                            </div>
+                            <i class="ph ph-caret-right text-gray-400"></i>
+                        </div>
+                        
+                        <!-- WhatsApp Agent -->
+                        <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-[#25D366] bg-opacity-10 text-[#25D366] rounded-full flex items-center justify-center">
+                                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800">WhatsApp Agent</h3>
+                                    <p class="text-[10px] text-gray-500 font-medium">+1 (413) 277-8388</p>
+                                </div>
+                            </div>
+                            <i class="ph ph-caret-right text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-primary text-white p-4 rounded-2xl flex items-start space-x-3 shadow-lg">
+                        <i class="ph-fill ph-check-circle text-yellow-400 text-xl mt-0.5"></i>
+                        <p class="text-[11px] font-medium leading-relaxed text-blue-100">
+                            Once your payment is completed and verified by the agent, your <span class="font-bold text-white">ID CODE</span> will be automatically displayed directly on your dashboard.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== DEPOSIT FUNDS VIEW ==================== -->
+        <div id="view-deposit" class="view-section">
+            <div class="min-h-screen bg-bgLight flex flex-col">
+                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
+                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
+                        <i class="ph ph-arrow-left text-xl font-bold"></i>
+                    </button>
+                    <h1 class="text-lg font-bold flex-1 text-center pr-8">Deposit Funds</h1>
+                </div>
+
+                <div class="px-6 flex-1 flex flex-col items-center justify-center pb-20">
+                    <div class="relative mb-6">
+                        <i class="ph ph-plug text-6xl text-gray-400"></i>
+                        <div class="absolute -bottom-1 -right-1 bg-white rounded-full p-0.5">
+                            <i class="ph-fill ph-x-circle text-brandRed text-2xl"></i>
+                        </div>
+                    </div>
+                    
+                    <h2 class="text-lg font-bold text-gray-800 mb-3 text-center">Deposits Temporarily Unavailable</h2>
+                    <p class="text-xs text-gray-500 font-medium text-center leading-relaxed mb-10 px-2">
+                        We are currently experiencing technical difficulties with our deposit gateways at the moment. Our engineering team is working hard to get it fixed soon. We apologize for any inconvenience.
+                    </p>
+
+                    <div class="w-full space-y-3">
+                        <button onclick="navigate('dashboard')" class="w-full bg-primary text-white font-bold rounded-xl py-4 text-sm shadow-md hover:opacity-95 transition-all">
+                            Return to Dashboard
+                        </button>
+                        <button onclick="navigate('support')" class="w-full bg-transparent border-2 border-primary text-primary font-bold rounded-xl py-4 text-sm hover:bg-blue-50 transition-all">
+                            Contact Support
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== HISTORY VIEW ==================== -->
+        <div id="view-history" class="view-section">
+            <div class="min-h-screen bg-bgLight flex flex-col">
+                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
+                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
+                        <i class="ph ph-arrow-left text-xl font-bold"></i>
+                    </button>
+                    <h1 class="text-lg font-bold flex-1 text-center pr-8">History</h1>
+                </div>
+
+                <div class="px-6 flex-1 flex flex-col items-center justify-center pb-20">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mb-6 text-gray-500">
+                        <i class="ph ph-clock-counter-clockwise text-4xl"></i>
+                    </div>
+                    
+                    <h2 class="text-lg font-bold text-gray-800 mb-3 text-center">No Transactions Yet</h2>
+                    <p class="text-xs text-gray-500 font-medium text-center leading-relaxed mb-10 px-4">
+                        Your history is currently empty. All your future deposits, withdrawals, and transfers will be securely recorded and shown right here.
+                    </p>
+
+                    <button onclick="navigate('transfer')" class="w-[80%] max-w-[250px] bg-primary text-white font-bold rounded-xl py-4 text-sm shadow-md hover:opacity-95 transition-all">
+                        Make a Transfer
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SUPPORT CENTER VIEW ==================== -->
+        <div id="view-support" class="view-section">
+            <div class="min-h-screen bg-bgLight pb-10">
+                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
+                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
+                        <i class="ph ph-arrow-left text-xl font-bold"></i>
+                    </button>
+                    <h1 class="text-lg font-bold flex-1 text-center pr-8">Support Center</h1>
+                </div>
+
+                <div class="px-5 mt-6">
+                    <h2 class="text-lg font-bold text-gray-800 mb-1 ml-1">How can we help?</h2>
+                    <p class="text-xs text-gray-500 mb-4 ml-1">Choose an option below to get in touch with our support team instantly.</p>
+                    
+                    <div class="space-y-3 mb-8">
+                        <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-gray-100 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-[#25D366] bg-opacity-10 text-[#25D366] rounded-full flex items-center justify-center">
+                                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800">WhatsApp Support</h3>
+                                    <p class="text-[10px] text-gray-500 font-medium">Typically replies in minutes</p>
+                                </div>
+                            </div>
+                            <i class="ph ph-caret-right text-gray-400"></i>
+                        </div>
+                        
+                        <div onclick="window.open('https://t.me/Amelia75506', '_blank')" class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-gray-100 cursor-pointer">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-[#0088cc] bg-opacity-10 text-[#0088cc] rounded-full flex items-center justify-center">
+                                    <i class="fa-brands fa-telegram text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800">Telegram Live Chat</h3>
+                                    <p class="text-[10px] text-gray-500 font-medium">Connect with an agent</p>
+                                </div>
+                            </div>
+                            <i class="ph ph-caret-right text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Send a Ticket</h2>
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 mb-8">
+                        <input type="text" placeholder="Subject (e.g., ID Code Issue)" class="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm mb-3">
+                        <textarea placeholder="Describe your issue in detail..." rows="4" class="w-full bg-gray-50 border border-gray-200 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm mb-4 resize-none"></textarea>
+                        <button class="w-full bg-primary text-white font-bold rounded-xl py-3.5 text-sm shadow-md hover:opacity-95 transition-all">
+                            Submit Ticket
+                        </button>
+                    </div>
+
+                    <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Frequently Asked Questions</h2>
+                    <div class="space-y-2">
+                        <!-- FAQ 1 -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="p-4 flex items-center justify-between cursor-pointer" onclick="toggleFaq(this)">
+                                <h3 class="text-xs font-bold text-gray-800">What is an ID CODE?</h3>
+                                <i class="ph ph-plus text-gray-400 font-bold transition-transform"></i>
+                            </div>
+                            <div class="faq-content px-4 text-[11px] text-gray-500 font-medium leading-relaxed">
+                                An ID CODE is a unique security authorization token required to process specific high-level transactions, such as transfers and withdrawals.
+                            </div>
+                        </div>
+                        <!-- FAQ 2 -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="p-4 flex items-center justify-between cursor-pointer" onclick="toggleFaq(this)">
+                                <h3 class="text-xs font-bold text-gray-800">How do I purchase one?</h3>
+                                <i class="ph ph-plus text-gray-400 font-bold transition-transform"></i>
+                            </div>
+                            <div class="faq-content px-4 text-[11px] text-gray-500 font-medium leading-relaxed">
+                                Navigate to the Dashboard, tap on "Buy CODE", enter your full name, and complete the payment process via the available secure payment methods.
+                            </div>
+                        </div>
+                        <!-- FAQ 3 -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="p-4 flex items-center justify-between cursor-pointer" onclick="toggleFaq(this)">
+                                <h3 class="text-xs font-bold text-gray-800">My transfer is pending. Why?</h3>
+                                <i class="ph ph-plus text-gray-400 font-bold transition-transform"></i>
+                            </div>
+                            <div class="faq-content px-4 text-[11px] text-gray-500 font-medium leading-relaxed">
+                                Transfers are usually instant. However, if an ID CODE is missing or invalid, the transaction will be placed on hold until authorized.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== EARN CRYPTO VIEW ==================== -->
+        <div id="view-earn" class="view-section">
+            <div class="min-h-screen bg-bgLight pb-10">
+                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
+                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
+                        <i class="ph ph-arrow-left text-xl font-bold"></i>
+                    </button>
+                    <h1 class="text-lg font-bold flex-1 text-center pr-8">Earn Crypto</h1>
+                </div>
+
+                <div class="px-5 mt-6">
+                    <div class="bg-primary rounded-[28px] p-6 text-white shadow-xl relative overflow-hidden mb-8">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-blue-200 text-xs font-medium tracking-wide">Total Earnings</span>
+                            <i class="ph-fill ph-coins text-yellow-400 text-xl"></i>
+                        </div>
+                        <h1 class="text-4xl font-extrabold tracking-tight mb-4">$0.00</h1>
+                        <div class="inline-flex items-center space-x-1.5 bg-white/10 rounded-md px-3 py-1.5 border border-white/20">
+                            <i class="ph-fill ph-lock-key text-yellow-400 text-[10px]"></i>
+                            <span class="text-[10px] font-bold text-blue-100">Premium Access Required</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Earning Methods</h2>
+                    <div class="space-y-3">
+                        <!-- Cloud Mining -->
+                        <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-gray-100 opacity-80">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-orange-50 text-orange-400 rounded-xl flex items-center justify-center">
+                                    <i class="ph-fill ph-cloud text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800">Cloud Mining</h3>
+                                    <p class="text-[10px] text-gray-500 font-medium">Mine crypto seamlessly</p>
+                                    <p class="text-[10px] font-bold text-brandGreen mt-0.5">Up to 15.5% APY</p>
+                                </div>
+                            </div>
+                            <div class="w-8 h-8 bg-red-50 rounded-full flex items-center justify-center">
+                                <i class="ph-fill ph-lock-key text-brandRed"></i>
+                            </div>
+                        </div>
+
+                        <!-- Fixed Staking -->
+                        <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-gray-100 opacity-80">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center">
+                                    <i class="ph-fill ph-stack text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800">Fixed Staking</h3>
+                                    <p class="text-[10px] text-gray-500 font-medium">Lock funds for guaranteed returns</p>
+                                    <p class="text-[10px] font-bold text-brandGreen mt-0.5">Up to 12.0% APY</p>
+                                </div>
+                            </div>
+                            <div class="w-8 h-8 bg-red-50 rounded-full flex items-center justify-center">
+                                <i class="ph-fill ph-lock-key text-brandRed"></i>
+                            </div>
+                        </div>
+
+                        <!-- Liquidity Farming -->
+                        <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-gray-100 opacity-80">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-green-50 text-brandGreen rounded-xl flex items-center justify-center">
+                                    <i class="ph-fill ph-leaf text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800">Liquidity Farming</h3>
+                                    <p class="text-[10px] text-gray-500 font-medium">Earn from platform trading fees</p>
+                                    <p class="text-[10px] font-bold text-brandGreen mt-0.5">Up to 24.2% APY</p>
+                                </div>
+                            </div>
+                            <div class="w-8 h-8 bg-red-50 rounded-full flex items-center justify-center">
+                                <i class="ph-fill ph-lock-key text-brandRed"></i>
+                            </div>
+                        </div>
+
+                        <!-- Watch & Earn -->
+                        <div class="bg-white rounded-2xl p-4 flex items-center justify-between shadow-sm border border-gray-100 opacity-80">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center">
+                                    <i class="ph-fill ph-play-circle text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-bold text-gray-800">Watch & Earn</h3>
+                                    <p class="text-[10px] text-gray-500 font-medium">Complete tasks for instant rewards</p>
+                                    <p class="text-[10px] font-bold text-brandGreen mt-0.5">Daily Payouts</p>
+                                </div>
+                            </div>
+                            <div class="w-8 h-8 bg-red-50 rounded-full flex items-center justify-center">
+                                <i class="ph-fill ph-lock-key text-brandRed"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TRANSFER VIEW (Also Used for Withdraw) ==================== -->
+        <div id="view-transfer" class="view-section">
+            <div class="min-h-screen bg-bgLight pb-10">
+                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
+                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
+                        <i class="ph ph-arrow-left text-xl font-bold"></i>
+                    </button>
+                    <h1 class="text-lg font-bold flex-1 text-center pr-8">Transfer Funds</h1>
+                </div>
+
+                <div class="px-5 mt-6">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center justify-between mb-6">
+                        <div>
+                            <p class="text-xs font-bold text-gray-500 mb-1">Available Balance</p>
+                            <h2 class="text-lg font-bold text-primary">$75,000.00</h2>
+                        </div>
+                        <div class="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center">
+                            <i class="ph ph-wallet text-xl"></i>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 flex flex-col items-center relative">
+                        <div class="flex items-baseline justify-center w-full relative">
+                            <span class="text-4xl font-extrabold text-gray-400 mr-1">$</span>
+                            <input type="number" id="transfer-amount" class="text-5xl font-extrabold text-gray-800 bg-transparent text-center focus:outline-none w-48 placeholder-gray-300" placeholder="0.00">
+                            <button class="absolute right-0 top-1/2 -translate-y-1/2 text-[10px] font-bold text-primary bg-blue-50 px-3 py-1.5 rounded-lg">MAX</button>
+                        </div>
+                        <div class="h-px w-full bg-gray-200 mt-2 max-w-[200px]"></div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-xs font-bold text-gray-800 mb-3 ml-1">Select Method</h2>
+                        <div class="grid grid-cols-2 gap-3" id="payment-methods">
+                            <div class="method-btn border-2 border-primary bg-primary text-white rounded-xl py-3 px-2 flex flex-col items-center justify-center cursor-pointer transition-all" onclick="selectMethod('btc', this)">
+                                <i class="fa-brands fa-bitcoin text-xl mb-1"></i>
+                                <span class="text-[11px] font-bold">Bitcoin (BTC)</span>
+                            </div>
+                            <div class="method-btn border border-gray-200 bg-white text-gray-600 rounded-xl py-3 px-2 flex flex-col items-center justify-center cursor-pointer transition-all" onclick="selectMethod('usdt', this)">
+                                <i class="fa-solid fa-t text-xl mb-1 text-[#26A17B]"></i>
+                                <span class="text-[11px] font-bold">USDT (TRC20)</span>
+                            </div>
+                            <div class="method-btn border border-gray-200 bg-white text-gray-600 rounded-xl py-3 px-2 flex flex-col items-center justify-center cursor-pointer transition-all" onclick="selectMethod('bank', this)">
+                                <i class="ph ph-bank text-xl mb-1"></i>
+                                <span class="text-[11px] font-bold">Bank Transfer</span>
+                            </div>
+                            <div class="method-btn border border-gray-200 bg-white text-gray-600 rounded-xl py-3 px-2 flex flex-col items-center justify-center cursor-pointer transition-all" onclick="selectMethod('paypal', this)">
+                                <i class="fa-brands fa-paypal text-xl mb-1 text-[#003087]"></i>
+                                <span class="text-[11px] font-bold">PayPal</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dynamic-form-area" class="mb-6">
+                        <div id="form-crypto">
+                            <h2 class="text-xs font-bold text-gray-800 mb-2 ml-1">Destination Address</h2>
+                            <input type="text" placeholder="Enter BTC Wallet Address" id="crypto-address-placeholder" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
+                        </div>
+
+                        <div id="form-bank" class="hidden">
+                            <h2 class="text-xs font-bold text-gray-800 mb-2 ml-1">Bank Details</h2>
+                            <div class="space-y-3">
+                                <input type="text" placeholder="Bank Name" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
+                                <input type="text" placeholder="Account Name" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
+                                <input type="number" placeholder="Account Number" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
+                                <input type="text" placeholder="Routing Number / Sort Code" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50 border border-red-100 rounded-xl p-4 mb-6 shadow-sm">
+                        <div class="flex items-center space-x-2 mb-3 text-gray-800">
+                            <i class="ph-fill ph-shield-check"></i>
+                            <span class="text-xs font-bold">Authorization Required</span>
+                        </div>
+                        <input type="text" placeholder="Enter ID CODE" class="w-full bg-white border border-red-200 text-center rounded-xl py-3 px-4 text-sm font-bold text-brandRed focus:outline-none focus:ring-2 focus:ring-brandRed focus:border-transparent transition-colors placeholder-red-300">
+                    </div>
+
+                    <button onclick="processTransfer()" class="w-full bg-primary text-white font-bold rounded-xl py-4 text-sm shadow-lg hover:opacity-95 transition-all">
+                        Process Transfer
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- ==================== COMMUNITY VIEW ==================== -->
         <div id="view-community" class="view-section">
             <div class="min-h-screen bg-bgLight pb-10">
-                <!-- Header -->
                 <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
                     <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
                         <i class="ph ph-arrow-left text-xl font-bold"></i>
@@ -317,10 +694,9 @@
                 </div>
 
                 <div class="px-5 mt-6">
-                    <!-- Channels -->
                     <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Join Official Channels</h2>
                     <div class="grid grid-cols-2 gap-3 mb-8">
-                        <div class="bg-white rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-gray-100 cursor-pointer">
+                        <div onclick="window.open('https://t.me/Amelia75506', '_blank')" class="bg-white rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-gray-100 cursor-pointer">
                             <div class="w-12 h-12 bg-blue-50 text-[#0088cc] rounded-full flex items-center justify-center mb-2">
                                 <i class="fa-brands fa-telegram text-2xl"></i>
                             </div>
@@ -336,25 +712,19 @@
                         </div>
                     </div>
 
-                    <!-- Live Activity -->
                     <div class="mb-8">
                         <div class="flex items-center justify-between mb-3 ml-1">
                             <h2 class="text-sm font-bold text-gray-800">Live Activity</h2>
                             <i class="ph-fill ph-broadcast text-brandRed pulse-dot"></i>
                         </div>
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div id="live-activity-list" class="flex flex-col">
-                                <!-- Populated by JS -->
-                            </div>
+                            <div id="live-activity-list" class="flex flex-col"></div>
                         </div>
                     </div>
 
-                    <!-- Weekly Top Earners -->
                     <div>
                         <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Weekly Top Earners</h2>
                         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col p-2 space-y-1">
-                            
-                            <!-- Rank 1 -->
                             <div class="flex items-center justify-between p-3">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-500 font-bold flex items-center justify-center text-sm">1</div>
@@ -365,8 +735,6 @@
                                 </div>
                                 <span class="text-sm font-bold text-primary">+$42,500</span>
                             </div>
-                            
-                            <!-- Rank 2 -->
                             <div class="flex items-center justify-between p-3 border-t border-gray-50">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center text-sm">2</div>
@@ -377,8 +745,6 @@
                                 </div>
                                 <span class="text-sm font-bold text-primary">+$28,300</span>
                             </div>
-
-                            <!-- Rank 3 -->
                             <div class="flex items-center justify-between p-3 border-t border-gray-50">
                                 <div class="flex items-center space-x-3">
                                     <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-400 font-bold flex items-center justify-center text-sm">3</div>
@@ -389,106 +755,8 @@
                                 </div>
                                 <span class="text-sm font-bold text-primary">+$19,100</span>
                             </div>
-
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== TRANSFER VIEW ==================== -->
-        <div id="view-transfer" class="view-section">
-            <div class="min-h-screen bg-bgLight pb-10">
-                <!-- Header -->
-                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
-                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
-                        <i class="ph ph-arrow-left text-xl font-bold"></i>
-                    </button>
-                    <h1 class="text-lg font-bold flex-1 text-center pr-8">Transfer Funds</h1>
-                </div>
-
-                <div class="px-5 mt-6">
-                    <!-- Top Balance -->
-                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-center justify-between mb-6">
-                        <div>
-                            <p class="text-xs font-bold text-gray-500 mb-1">Available Balance</p>
-                            <h2 class="text-lg font-bold text-primary">$75,000.00</h2>
-                        </div>
-                        <div class="w-10 h-10 bg-blue-50 text-primary rounded-xl flex items-center justify-center">
-                            <i class="ph ph-wallet text-xl"></i>
-                        </div>
-                    </div>
-
-                    <!-- Amount Input -->
-                    <div class="mb-8 flex flex-col items-center relative">
-                        <div class="flex items-baseline justify-center w-full relative">
-                            <span class="text-4xl font-extrabold text-gray-400 mr-1">$</span>
-                            <input type="number" id="transfer-amount" class="text-5xl font-extrabold text-gray-800 bg-transparent text-center focus:outline-none w-48 placeholder-gray-300" placeholder="0.00">
-                            <button class="absolute right-0 top-1/2 -translate-y-1/2 text-[10px] font-bold text-primary bg-blue-50 px-3 py-1.5 rounded-lg">MAX</button>
-                        </div>
-                        <div class="h-px w-full bg-gray-200 mt-2 max-w-[200px]"></div>
-                    </div>
-
-                    <!-- Select Method -->
-                    <div class="mb-6">
-                        <h2 class="text-xs font-bold text-gray-800 mb-3 ml-1">Select Method</h2>
-                        <div class="grid grid-cols-2 gap-3" id="payment-methods">
-                            <!-- Method BTC -->
-                            <div class="method-btn border-2 border-primary bg-primary text-white rounded-xl py-3 px-2 flex flex-col items-center justify-center cursor-pointer transition-all" onclick="selectMethod('btc', this)">
-                                <i class="fa-brands fa-bitcoin text-xl mb-1"></i>
-                                <span class="text-[11px] font-bold">Bitcoin (BTC)</span>
-                            </div>
-                            <!-- Method USDT -->
-                            <div class="method-btn border border-gray-200 bg-white text-gray-600 rounded-xl py-3 px-2 flex flex-col items-center justify-center cursor-pointer transition-all" onclick="selectMethod('usdt', this)">
-                                <i class="fa-solid fa-t text-xl mb-1 text-[#26A17B]"></i>
-                                <span class="text-[11px] font-bold">USDT (TRC20)</span>
-                            </div>
-                            <!-- Method Bank -->
-                            <div class="method-btn border border-gray-200 bg-white text-gray-600 rounded-xl py-3 px-2 flex flex-col items-center justify-center cursor-pointer transition-all" onclick="selectMethod('bank', this)">
-                                <i class="ph ph-bank text-xl mb-1"></i>
-                                <span class="text-[11px] font-bold">Bank Transfer</span>
-                            </div>
-                            <!-- Method PayPal -->
-                            <div class="method-btn border border-gray-200 bg-white text-gray-600 rounded-xl py-3 px-2 flex flex-col items-center justify-center cursor-pointer transition-all" onclick="selectMethod('paypal', this)">
-                                <i class="fa-brands fa-paypal text-xl mb-1 text-[#003087]"></i>
-                                <span class="text-[11px] font-bold">PayPal</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dynamic Forms based on method -->
-                    <div id="dynamic-form-area" class="mb-6">
-                        <!-- Default Crypto Address Form -->
-                        <div id="form-crypto">
-                            <h2 class="text-xs font-bold text-gray-800 mb-2 ml-1">Destination Address</h2>
-                            <input type="text" placeholder="Enter BTC Wallet Address" id="crypto-address-placeholder" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
-                        </div>
-
-                        <!-- Bank Details Form (Hidden initially) -->
-                        <div id="form-bank" class="hidden">
-                            <h2 class="text-xs font-bold text-gray-800 mb-2 ml-1">Bank Details</h2>
-                            <div class="space-y-3">
-                                <input type="text" placeholder="Bank Name" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
-                                <input type="text" placeholder="Account Name" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
-                                <input type="number" placeholder="Account Number" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
-                                <input type="text" placeholder="Routing Number / Sort Code" class="w-full bg-white border border-gray-200 rounded-xl py-3.5 px-4 text-xs font-medium focus:outline-none focus:border-primary transition-colors shadow-sm">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Authorization Box -->
-                    <div class="bg-red-50 border border-red-100 rounded-xl p-4 mb-6 shadow-sm">
-                        <div class="flex items-center space-x-2 mb-3 text-gray-800">
-                            <i class="ph-fill ph-shield-check"></i>
-                            <span class="text-xs font-bold">Authorization Required</span>
-                        </div>
-                        <input type="text" placeholder="Enter ID CODE" class="w-full bg-white border border-red-200 text-center rounded-xl py-3 px-4 text-sm font-bold text-brandRed focus:outline-none focus:ring-2 focus:ring-brandRed focus:border-transparent transition-colors placeholder-red-300">
-                    </div>
-
-                    <!-- Process Button -->
-                    <button onclick="processTransfer()" class="w-full bg-primary text-white font-bold rounded-xl py-4 text-sm shadow-lg hover:opacity-95 transition-all">
-                        Process Transfer
-                    </button>
                 </div>
             </div>
         </div>
@@ -499,36 +767,40 @@
     <script>
         const DEMO_USER = { name: 'Ponfa', email: 'zeusberry2@gmail.com', password: 'password123' };
 
-        // ======= View Navigation System =======
         function navigate(viewId) {
-            // Remove active state from all views completely
-            document.querySelectorAll('.view-section').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // Add active class exactly to target
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
             document.getElementById(`view-${viewId}`).classList.add('active');
             window.scrollTo(0, 0);
 
-            // Page specific triggers
             if (viewId === 'community') initLiveActivityGenerator();
             if (viewId === 'transfer') document.getElementById('transfer-amount').value = '';
             
-            // Clear any lingering error messages
             const loginErr = document.getElementById('login-error');
             const signupErr = document.getElementById('signup-error');
             if(loginErr) loginErr.classList.add('hidden');
             if(signupErr) signupErr.classList.add('hidden');
         }
 
-        // ======= Local Storage Authentication System =======
+        // Support Center FAQ Toggle Logic
+        function toggleFaq(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.classList.remove('ph-x', 'text-brandRed');
+                icon.classList.add('ph-plus');
+            } else {
+                content.classList.add('open');
+                icon.classList.remove('ph-plus');
+                icon.classList.add('ph-x', 'text-brandRed');
+            }
+        }
+
         function initAuth() {
-            // Setup demo database if it's the first time visiting
             if (!localStorage.getItem('appUsers')) {
                 localStorage.setItem('appUsers', JSON.stringify([DEMO_USER]));
             }
-
-            // Route user based on active session
             const activeSession = localStorage.getItem('activeUser');
             if (activeSession) {
                 setupDashboard(JSON.parse(activeSession));
@@ -581,11 +853,9 @@
                 users.push(newUser);
                 localStorage.setItem('appUsers', JSON.stringify(users));
                 
-                // Auto login new user
                 localStorage.setItem('activeUser', JSON.stringify(newUser));
                 setupDashboard(newUser);
                 navigate('dashboard');
-                
                 document.getElementById('signup-form').reset();
             });
         }
@@ -601,7 +871,6 @@
             document.getElementById('user-avatar').textContent = firstName.charAt(0).toUpperCase();
         }
 
-        // Utility Function: API loading state
         function simulateLoading(prefix, callback) {
             const btn = document.getElementById(`${prefix}-btn`);
             const spinner = document.getElementById(`${prefix}-spinner`);
@@ -621,7 +890,6 @@
             }, 1000);
         }
 
-        // Utility Function: Password visibility toggle
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             const icon = input.nextElementSibling;
@@ -636,7 +904,6 @@
             }
         }
 
-        // ======= Transfer Form Logic =======
         function selectMethod(method, element) {
             const buttons = document.querySelectorAll('.method-btn');
             buttons.forEach(btn => {
@@ -666,7 +933,6 @@
             alert("Please verify your ID CODE to complete the transfer.");
         }
 
-        // ======= Live Activity Generator =======
         let liveActivities =[
             { id: 1, name: 'Michael K.', actionHTML: 'verified a <span class="font-bold text-brandGreen">Withdrawal</span>', time: '2m ago', initials: 'MK', color: 'bg-primary text-white' },
             { id: 2, name: 'Sarah J.', actionHTML: 'purchased an <span class="font-bold text-primary">ID CODE</span>', time: '5m ago', initials: 'SJ', color: 'bg-gray-100 text-gray-600' },
@@ -684,6 +950,7 @@
 
         function renderActivities() {
             const container = document.getElementById('live-activity-list');
+            if(!container) return;
             container.innerHTML = '';
             
             liveActivities.forEach((act, index) => {
@@ -734,7 +1001,6 @@
             }, 7000);
         }
 
-        // Initialize the app synchronously preventing layout flashes
         initAuth();
     </script>
 </body>
