@@ -88,6 +88,54 @@
 
     <div class="app-container" id="app">
 
+        <!-- ==================== SIGNUP VIEW (DEFAULT) ==================== -->
+        <div id="view-signup" class="view-section">
+            <div class="min-h-screen flex flex-col">
+                <div class="bg-primary rounded-b-[40px] pt-20 pb-28 px-6 text-center text-white shadow-md relative">
+                    <h1 class="text-3xl font-bold mb-2 tracking-wide">Create Account</h1>
+                    <p class="text-blue-200 text-sm opacity-90">Join the platform securely</p>
+                </div>
+                
+                <div class="px-6 -mt-16 flex-1 pb-10">
+                    <div class="bg-white rounded-3xl shadow-xl p-7 relative z-10">
+                        <form id="signup-form" onsubmit="handleSignup(event)">
+                            <div class="mb-5 relative">
+                                <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Full Name</label>
+                                <div class="relative flex items-center">
+                                    <i class="ph ph-user absolute left-4 text-gray-500 text-lg"></i>
+                                    <input type="text" id="signup-name" placeholder="Enter your full name" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
+                                </div>
+                            </div>
+                            <div class="mb-5 relative">
+                                <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Email Address</label>
+                                <div class="relative flex items-center">
+                                    <i class="ph ph-envelope-simple absolute left-4 text-gray-500 text-lg"></i>
+                                    <input type="email" id="signup-email" placeholder="email@example.com" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
+                                </div>
+                            </div>
+                            <div class="mb-8 relative">
+                                <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Password</label>
+                                <div class="relative flex items-center">
+                                    <i class="ph ph-lock-key absolute left-4 text-gray-400 text-lg"></i>
+                                    <input type="password" id="signup-password" placeholder="Create a password" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required minlength="6">
+                                    <i class="ph ph-eye-slash absolute right-4 text-gray-400 text-lg cursor-pointer" onclick="togglePassword('signup-password')"></i>
+                                </div>
+                            </div>
+                            <button type="submit" id="signup-btn" class="w-full bg-primary text-white font-bold rounded-xl py-4 text-sm shadow-lg hover:opacity-95 transition-all flex justify-center items-center">
+                                <span>Sign Up</span>
+                                <i class="ph ph-spinner animate-spin text-xl hidden ml-2" id="signup-spinner"></i>
+                            </button>
+                            
+                            <!-- Redirect to Login Button -->
+                            <p class="text-center mt-6 text-xs text-gray-500 font-medium">
+                                Already have an account? <span onclick="navigate('login')" class="text-brandRed font-bold hover:underline ml-1 cursor-pointer">Log In</span>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ==================== LOGIN VIEW ==================== -->
         <div id="view-login" class="view-section">
             <div class="min-h-screen flex flex-col">
@@ -99,15 +147,12 @@
                 <div class="px-6 -mt-16 flex-1 pb-10">
                     <div class="bg-white rounded-3xl shadow-xl p-7 relative z-10">
                         <form id="login-form" onsubmit="handleLogin(event)">
-                            <div id="login-error" class="hidden bg-red-50 text-brandRed text-xs font-bold p-3 rounded-lg mb-4 text-center border border-red-100">
-                                Invalid email or password.
-                            </div>
                             <!-- Email Input -->
                             <div class="mb-5 relative">
                                 <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Email Address</label>
                                 <div class="relative flex items-center">
                                     <i class="ph ph-envelope-simple absolute left-4 text-gray-500 text-lg"></i>
-                                    <input type="email" id="login-email" value="zeusberry2@gmail.com" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
+                                    <input type="email" id="login-email" placeholder="email@example.com" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
                                 </div>
                             </div>
                             <!-- Password Input -->
@@ -115,7 +160,7 @@
                                 <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Password</label>
                                 <div class="relative flex items-center">
                                     <i class="ph ph-lock-key absolute left-4 text-gray-400 text-lg"></i>
-                                    <input type="password" id="login-password" value="password123" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
+                                    <input type="password" id="login-password" placeholder="Enter your password" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
                                     <i class="ph ph-eye-slash absolute right-4 text-gray-400 text-lg cursor-pointer" onclick="togglePassword('login-password')"></i>
                                 </div>
                             </div>
@@ -140,62 +185,15 @@
             </div>
         </div>
 
-        <!-- ==================== SIGNUP VIEW ==================== -->
-        <div id="view-signup" class="view-section">
-            <div class="min-h-screen flex flex-col">
-                <div class="bg-primary rounded-b-[40px] pt-20 pb-28 px-6 text-center text-white shadow-md relative">
-                    <h1 class="text-3xl font-bold mb-2 tracking-wide">Create Account</h1>
-                    <p class="text-blue-200 text-sm opacity-90">Join the platform securely</p>
-                </div>
-                
-                <div class="px-6 -mt-16 flex-1 pb-10">
-                    <div class="bg-white rounded-3xl shadow-xl p-7 relative z-10">
-                        <form id="signup-form" onsubmit="handleSignup(event)">
-                            <div id="signup-error" class="hidden bg-red-50 text-brandRed text-xs font-bold p-3 rounded-lg mb-4 text-center border border-red-100"></div>
-                            <div class="mb-5 relative">
-                                <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Full Name</label>
-                                <div class="relative flex items-center">
-                                    <i class="ph ph-user absolute left-4 text-gray-500 text-lg"></i>
-                                    <input type="text" id="signup-name" placeholder="John Doe" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
-                                </div>
-                            </div>
-                            <div class="mb-5 relative">
-                                <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Email Address</label>
-                                <div class="relative flex items-center">
-                                    <i class="ph ph-envelope-simple absolute left-4 text-gray-500 text-lg"></i>
-                                    <input type="email" id="signup-email" placeholder="email@example.com" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-4 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required>
-                                </div>
-                            </div>
-                            <div class="mb-8 relative">
-                                <label class="block text-xs font-bold text-gray-700 mb-2 ml-1">Password</label>
-                                <div class="relative flex items-center">
-                                    <i class="ph ph-lock-key absolute left-4 text-gray-400 text-lg"></i>
-                                    <input type="password" id="signup-password" placeholder="Create a password" class="w-full bg-transparent border border-gray-300 rounded-xl py-3 pl-12 pr-12 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary transition-all" required minlength="6">
-                                    <i class="ph ph-eye-slash absolute right-4 text-gray-400 text-lg cursor-pointer" onclick="togglePassword('signup-password')"></i>
-                                </div>
-                            </div>
-                            <button type="submit" id="signup-btn" class="w-full bg-primary text-white font-bold rounded-xl py-4 text-sm shadow-lg hover:opacity-95 transition-all flex justify-center items-center">
-                                <span>Sign Up</span>
-                                <i class="ph ph-spinner animate-spin text-xl hidden ml-2" id="signup-spinner"></i>
-                            </button>
-                            <p class="text-center mt-6 text-xs text-gray-500 font-medium">
-                                Already have an account? <span onclick="navigate('login')" class="text-brandRed font-bold hover:underline ml-1 cursor-pointer">Log In</span>
-                            </p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- ==================== DASHBOARD VIEW ==================== -->
         <div id="view-dashboard" class="view-section">
             <div class="min-h-screen bg-gray-50 pb-10">
                 <!-- Header -->
                 <div class="pt-12 px-6 pb-4 flex justify-between items-center">
                     <div class="flex items-center space-x-3">
-                        <div id="user-avatar" class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg shadow-md uppercase">P</div>
+                        <div id="user-avatar" class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg shadow-md uppercase">U</div>
                         <div>
-                            <h2 class="text-gray-900 font-bold text-sm">Hi, <span id="user-greeting-name">Ponfa</span> 👋</h2>
+                            <h2 class="text-gray-900 font-bold text-sm">Hi, <span id="user-greeting-name">User</span> 👋</h2>
                             <p class="text-gray-500 text-xs font-medium">Welcome back!</p>
                         </div>
                     </div>
@@ -599,7 +597,7 @@
             </div>
         </div>
 
-        <!-- ==================== TRANSFER VIEW (Also Used for Withdraw) ==================== -->
+        <!-- ==================== TRANSFER VIEW ==================== -->
         <div id="view-transfer" class="view-section">
             <div class="min-h-screen bg-bgLight pb-10">
                 <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
@@ -683,89 +681,12 @@
             </div>
         </div>
 
-        <!-- ==================== COMMUNITY VIEW ==================== -->
-        <div id="view-community" class="view-section">
-            <div class="min-h-screen bg-bgLight pb-10">
-                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
-                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
-                        <i class="ph ph-arrow-left text-xl font-bold"></i>
-                    </button>
-                    <h1 class="text-lg font-bold flex-1 text-center pr-8">Community</h1>
-                </div>
-
-                <div class="px-5 mt-6">
-                    <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Join Official Channels</h2>
-                    <div class="grid grid-cols-2 gap-3 mb-8">
-                        <div onclick="window.open('https://t.me/Amelia75506', '_blank')" class="bg-white rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-gray-100 cursor-pointer">
-                            <div class="w-12 h-12 bg-blue-50 text-[#0088cc] rounded-full flex items-center justify-center mb-2">
-                                <i class="fa-brands fa-telegram text-2xl"></i>
-                            </div>
-                            <h3 class="text-xs font-bold text-gray-800 text-center">VIP Telegram</h3>
-                            <p class="text-[10px] text-gray-500 mt-1">Join 8,200+ Members</p>
-                        </div>
-                        <div class="bg-white rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-gray-100 cursor-pointer">
-                            <div class="w-12 h-12 bg-green-50 text-[#25D366] rounded-full flex items-center justify-center mb-2">
-                                <i class="fa-brands fa-whatsapp text-2xl"></i>
-                            </div>
-                            <h3 class="text-xs font-bold text-gray-800 text-center">WhatsApp Admin</h3>
-                            <p class="text-[10px] text-gray-500 mt-1">Direct Assistance</p>
-                        </div>
-                    </div>
-
-                    <div class="mb-8">
-                        <div class="flex items-center justify-between mb-3 ml-1">
-                            <h2 class="text-sm font-bold text-gray-800">Live Activity</h2>
-                            <i class="ph-fill ph-broadcast text-brandRed pulse-dot"></i>
-                        </div>
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div id="live-activity-list" class="flex flex-col"></div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Weekly Top Earners</h2>
-                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col p-2 space-y-1">
-                            <div class="flex items-center justify-between p-3">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-500 font-bold flex items-center justify-center text-sm">1</div>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-gray-800">David W.</h4>
-                                        <p class="text-[10px] text-gray-500 font-medium">Elite Investor</p>
-                                    </div>
-                                </div>
-                                <span class="text-sm font-bold text-primary">+$42,500</span>
-                            </div>
-                            <div class="flex items-center justify-between p-3 border-t border-gray-50">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center text-sm">2</div>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-gray-800">Elena P.</h4>
-                                        <p class="text-[10px] text-gray-500 font-medium">Pro Investor</p>
-                                    </div>
-                                </div>
-                                <span class="text-sm font-bold text-primary">+$28,300</span>
-                            </div>
-                            <div class="flex items-center justify-between p-3 border-t border-gray-50">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-400 font-bold flex items-center justify-center text-sm">3</div>
-                                    <div>
-                                        <h4 class="text-xs font-bold text-gray-800">James L.</h4>
-                                        <p class="text-[10px] text-gray-500 font-medium">Pro Investor</p>
-                                    </div>
-                                </div>
-                                <span class="text-sm font-bold text-primary">+$19,100</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <!-- JavaScript Application Logic -->
     <script>
-        const DEMO_USER = { name: 'Ponfa', email: 'zeusberry2@gmail.com', password: 'password123' };
+        // Non-persistent state for the session
+        let currentUser = null;
 
         function navigate(viewId) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
@@ -774,14 +695,8 @@
 
             if (viewId === 'community') initLiveActivityGenerator();
             if (viewId === 'transfer') document.getElementById('transfer-amount').value = '';
-            
-            const loginErr = document.getElementById('login-error');
-            const signupErr = document.getElementById('signup-error');
-            if(loginErr) loginErr.classList.add('hidden');
-            if(signupErr) signupErr.classList.add('hidden');
         }
 
-        // Support Center FAQ Toggle Logic
         function toggleFaq(element) {
             const content = element.nextElementSibling;
             const icon = element.querySelector('i');
@@ -797,76 +712,41 @@
             }
         }
 
-        function initAuth() {
-            if (!localStorage.getItem('appUsers')) {
-                localStorage.setItem('appUsers', JSON.stringify([DEMO_USER]));
-            }
-            const activeSession = localStorage.getItem('activeUser');
-            if (activeSession) {
-                setupDashboard(JSON.parse(activeSession));
-                navigate('dashboard');
-            } else {
-                navigate('login');
-            }
-        }
-
-        function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value;
-            const errorDiv = document.getElementById('login-error');
-            
-            errorDiv.classList.add('hidden');
-            simulateLoading('login', () => {
-                const users = JSON.parse(localStorage.getItem('appUsers')) ||[];
-                const user = users.find(u => u.email === email && u.password === password);
-
-                if (user) {
-                    localStorage.setItem('activeUser', JSON.stringify(user));
-                    setupDashboard(user);
-                    navigate('dashboard');
-                } else {
-                    errorDiv.textContent = "Invalid email or password.";
-                    errorDiv.classList.remove('hidden');
-                }
-            });
-        }
-
+        // --- Simulated Authentication Flows ---
         function handleSignup(e) {
             e.preventDefault();
-            const name = document.getElementById('signup-name').value.trim();
-            const email = document.getElementById('signup-email').value.trim();
-            const password = document.getElementById('signup-password').value;
-            const errorDiv = document.getElementById('signup-error');
+            const nameInput = document.getElementById('signup-name').value.trim() || 'User';
             
-            errorDiv.classList.add('hidden');
             simulateLoading('signup', () => {
-                let users = JSON.parse(localStorage.getItem('appUsers')) ||[];
-                
-                if (users.find(u => u.email === email)) {
-                    errorDiv.textContent = "Email is already registered. Please log in.";
-                    errorDiv.classList.remove('hidden');
-                    return;
-                }
-
-                const newUser = { name, email, password };
-                users.push(newUser);
-                localStorage.setItem('appUsers', JSON.stringify(users));
-                
-                localStorage.setItem('activeUser', JSON.stringify(newUser));
-                setupDashboard(newUser);
+                currentUser = { name: nameInput };
+                setupDashboard(currentUser);
                 navigate('dashboard');
                 document.getElementById('signup-form').reset();
             });
         }
 
+        function handleLogin(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('login-email').value.trim();
+            // Extract the first part of the email to use as a display name for the visual prototype
+            const extractedName = emailInput ? emailInput.split('@')[0] : 'User';
+
+            simulateLoading('login', () => {
+                currentUser = { name: extractedName };
+                setupDashboard(currentUser);
+                navigate('dashboard');
+                document.getElementById('login-form').reset();
+            });
+        }
+
         function logoutUser() {
-            localStorage.removeItem('activeUser');
+            currentUser = null;
             navigate('login');
         }
 
         function setupDashboard(user) {
-            const firstName = user.name.split(' ')[0];
+            // Display User Name gracefully
+            const firstName = user.name.split(' ')[0] || 'User';
             document.getElementById('user-greeting-name').textContent = firstName;
             document.getElementById('user-avatar').textContent = firstName.charAt(0).toUpperCase();
         }
@@ -904,6 +784,7 @@
             }
         }
 
+        // --- Transfer Logic ---
         function selectMethod(method, element) {
             const buttons = document.querySelectorAll('.method-btn');
             buttons.forEach(btn => {
@@ -933,6 +814,7 @@
             alert("Please verify your ID CODE to complete the transfer.");
         }
 
+        // --- Live Activity Generator ---
         let liveActivities =[
             { id: 1, name: 'Michael K.', actionHTML: 'verified a <span class="font-bold text-brandGreen">Withdrawal</span>', time: '2m ago', initials: 'MK', color: 'bg-primary text-white' },
             { id: 2, name: 'Sarah J.', actionHTML: 'purchased an <span class="font-bold text-primary">ID CODE</span>', time: '5m ago', initials: 'SJ', color: 'bg-gray-100 text-gray-600' },
@@ -1001,7 +883,8 @@
             }, 7000);
         }
 
-        initAuth();
+        // Initialize App to Default Route
+        navigate('signup');
     </script>
 </body>
 </html>
