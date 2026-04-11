@@ -292,6 +292,98 @@
             </div>
         </div>
 
+
+        <!-- ==================== COMMUNITY VIEW ==================== -->
+        <div id="view-community" class="view-section">
+            <div class="min-h-screen bg-bgLight pb-10">
+                <!-- Header -->
+                <div class="bg-primary text-white pt-12 pb-4 px-4 flex items-center sticky top-0 z-20 shadow-sm">
+                    <button onclick="navigate('dashboard')" class="p-2 hover:bg-white/10 rounded-full transition-colors mr-2">
+                        <i class="ph ph-arrow-left text-xl font-bold"></i>
+                    </button>
+                    <h1 class="text-lg font-bold flex-1 text-center pr-8">Community</h1>
+                </div>
+
+                <div class="px-5 mt-6">
+                    <!-- Channels -->
+                    <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Join Official Channels</h2>
+                    <div class="grid grid-cols-2 gap-3 mb-8">
+                        <div class="bg-white rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-gray-100 cursor-pointer">
+                            <div class="w-12 h-12 bg-blue-50 text-[#0088cc] rounded-full flex items-center justify-center mb-2">
+                                <i class="fa-brands fa-telegram text-2xl"></i>
+                            </div>
+                            <h3 class="text-xs font-bold text-gray-800 text-center">VIP Telegram</h3>
+                            <p class="text-[10px] text-gray-500 mt-1">Join 8,200+ Members</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-4 flex flex-col items-center justify-center shadow-sm border border-gray-100 cursor-pointer">
+                            <div class="w-12 h-12 bg-green-50 text-[#25D366] rounded-full flex items-center justify-center mb-2">
+                                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                            </div>
+                            <h3 class="text-xs font-bold text-gray-800 text-center">WhatsApp Admin</h3>
+                            <p class="text-[10px] text-gray-500 mt-1">Direct Assistance</p>
+                        </div>
+                    </div>
+
+                    <!-- Live Activity -->
+                    <div class="mb-8">
+                        <div class="flex items-center justify-between mb-3 ml-1">
+                            <h2 class="text-sm font-bold text-gray-800">Live Activity</h2>
+                            <i class="ph-fill ph-broadcast text-brandRed pulse-dot"></i>
+                        </div>
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div id="live-activity-list" class="flex flex-col">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weekly Top Earners -->
+                    <div>
+                        <h2 class="text-sm font-bold text-gray-800 mb-3 ml-1">Weekly Top Earners</h2>
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col p-2 space-y-1">
+                            
+                            <!-- Rank 1 -->
+                            <div class="flex items-center justify-between p-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-500 font-bold flex items-center justify-center text-sm">1</div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-gray-800">David W.</h4>
+                                        <p class="text-[10px] text-gray-500 font-medium">Elite Investor</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-primary">+$42,500</span>
+                            </div>
+                            
+                            <!-- Rank 2 -->
+                            <div class="flex items-center justify-between p-3 border-t border-gray-50">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 font-bold flex items-center justify-center text-sm">2</div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-gray-800">Elena P.</h4>
+                                        <p class="text-[10px] text-gray-500 font-medium">Pro Investor</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-primary">+$28,300</span>
+                            </div>
+
+                            <!-- Rank 3 -->
+                            <div class="flex items-center justify-between p-3 border-t border-gray-50">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-orange-50 text-orange-400 font-bold flex items-center justify-center text-sm">3</div>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-gray-800">James L.</h4>
+                                        <p class="text-[10px] text-gray-500 font-medium">Pro Investor</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-primary">+$19,100</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ==================== BUY ID CODE VIEW ==================== -->
         <div id="view-buycode" class="view-section">
             <div class="min-h-screen bg-bgLight pb-10">
