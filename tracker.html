@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Tracker Dashboard</title>
+    <!-- Tailwind CSS for rapid UI styling matching the video -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel for in-browser JSX compilation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        /* Custom styles for elements difficult to achieve strictly with utility classes */
+        body { background-color: #f3f4f6; }
+        
+        /* Custom Scrollbar for the table */
+        .table-container::-webkit-scrollbar { height: 8px; }
+        .table-container::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 4px; }
+        .table-container::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        .table-container::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* Spreadsheet Borders */
+        .sheet-border { border: 1px solid #e5e7eb; }
+        
+        /* Circular Progress Chart CSS */
+        .circular-chart { display: block; margin: 0 auto; max-width: 100%; max-height: 120px; }
+        .circle-bg { fill: none; stroke: #e6e6e6; stroke-width: 3.8; }
+        .circle { fill: none; stroke-width: 3.8; stroke-linecap: round; transition: stroke-dasharray 0.5s ease; }
+        .circular-chart.green .circle { stroke: #22c55e; }
+        .percentage { fill: #374151; font-family: sans-serif; font-size: 0.6em; text-anchor: middle; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- Utility Functions ---
+        const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
+        
+        const getDatesOfMonth = (year, month) => {
+            const days = getDaysInMonth(year, month);
+            return Array.from({ length: days }, (_, i) => {
+                const d = new Date(year, month, i + 1);
+                return {
+                    dateStr: d.toISOString().split('T')[0],
+                    dayNum: i + 1,
+                    dow: d.toLocaleDateString('en-US', { weekday: 'short' })[0]
+                };
+            });
+        };
+
+        const getCurrentWeek = (baseDate = new Date()) => {
+            const startOfWeek = new Date(baseDate);
+            const day = startOfWeek.getDay();
+            const diff = startOfWeek.getDate() - day + (day === 0 ? -6 : 1); // Adjust to Monday
+            startOfWeek.setDate(diff);
+
+            return Array.from({ length: 7 }, (_, i) => {
+                const d = new Date(startOfWeek);
+                d.setDate(d.getDate() + i);
+                return {
+                    dateStr: d.toISOString().split('T')[0],
+                    formattedStr: d.toLocaleDateString('en-GB').replace(/\//g, '.'),
+                    dayName: d.toLocaleDateString('en-US', { weekday: 'long' })
+                };
+            });
+        };
+
+        const defaultHabits = [
+            { id: '1', name: 'Wake up at 05:00 ⏰' },
+            { id: '2', name: 'Gym 🏋️' },
+            { id: '3', name: 'Stop Watching Porn 🛑' },
+            { id: '4', name: 'Reading / Learning 📚' },
+            { id: '5', name: 'Budget Tracking 💸' },
+            { id: '6', name: 'Project Work 💻' },
+            { id: '7', name: 'No Alcohol 🚫' },
+            { id: '8', name: 'Social Media Detox 📱' },
+            { id: '9', name: 'Goal Journaling 📓' },
+            { id: '10', name: 'Cold Shower 🚿' }
+        ];
+
+        // --- Main App Component ---
+        function App() {
+            // State
+            const [activeTab, setActiveTab] = useState('habits');
+            const [currentDate, setCurrentDate] = useState(new Date());
+            
+            // Persisted States
+            const [habits, setHabits] = useState(() => JSON.parse(localStorage.getItem('habits')) || defaultHabits);
+            const [habitLogs, setHabitLogs] = useState(() => JSON.parse(localStorage.getItem('habitLogs')) || {});
+            const [tasks, setTasks] = useState(() => JSON.parse(localStorage.getItem('tasks')) || {});
+
+            // Save to localStorage on change
+            useEffect(() => { localStorage.setItem('habits', JSON.stringify(habits)); }, [habits]);
+            useEffect(() => { localStorage.setItem('habitLogs', JSON.stringify(habitLogs)); }, [habitLogs]);
+            useEffect(() => { localStorage.setItem('tasks', JSON.stringify(tasks)); }, [tasks]);
+
+            // --- Handlers ---
+            const toggleHabit = (dateStr, habitId) => {
+                setHabitLogs(prev => {
+                    const newLogs = { ...prev };
+                    if (!newLogs[dateStr]) newLogs[dateStr] = {};
+                    newLogs[dateStr][habitId] = !newLogs[dateStr][habitId];
+                    return newLogs;
+                });
+            };
+
+            const toggleTask = (dateStr, taskId) => {
+                setTasks(prev => {
+                    const dayTasks = prev[dateStr] || [];
+                    return {
+                        ...prev,
+                        [dateStr]: dayTasks.map(t => t.id === taskId ? { ...t, done: !t.done } : t)
+                    };
+                });
+            };
+
+            const addTask = (dateStr, text) => {
+                if (!text.trim()) return;
+                setTasks(prev => {
+                    const dayTasks = prev[dateStr] || [];
+                    return {
+                        ...prev,
+                        [dateStr]: [...dayTasks, { id: Date.now().toString(), text, done: false }]
+                    };
+                });
+            };
+
+            const deleteTask = (dateStr, taskId) => {
+                setTasks(prev => {
+                    const dayTasks = prev[dateStr] || [];
+                    return { ...prev, [dateStr]: dayTasks.filter(t => t.id !== taskId) };
+                });
+            };
+
+            return (
+                <div className="min-h-screen flex flex-col">
+                    {/* Navigation */}
+                    <nav className="bg-white shadow-sm border-b border-gray-200">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex justify-between h-16">
+                                <div className="flex space-x-8">
+                                    <button onClick={() => setActiveTab('habits')} className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${activeTab === 'habits' ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+                                        Monthly Habits
+                                    </button>
+                                    <button onClick={() => setActiveTab('weekly')} className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${activeTab === 'weekly' ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+                                        Weekly Planner
+                                    </button>
+                                    <button onClick={() => setActiveTab('manage')} className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${activeTab === 'manage' ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'}`}>
+                                        Manage Goals
+                                    </button>
+                                </div>
+                                <div className="flex items-center">
+                                    <span className="text-xl font-bold text-gray-800">LifeTracker OS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {/* Main Content Area */}
+                    <main className="flex-1 max-w-[100vw] mx-auto p-4 md:p-8 w-full">
+                        {activeTab === 'habits' && (
+                            <HabitsTracker 
+                                currentDate={currentDate} 
+                                setCurrentDate={setCurrentDate}
+                                habits={habits}
+                                habitLogs={habitLogs}
+                                toggleHabit={toggleHabit}
+                            />
+                        )}
+                        {activeTab === 'weekly' && (
+                            <WeeklyPlanner 
+                                currentDate={currentDate} 
+                                setCurrentDate={setCurrentDate}
+                                tasks={tasks}
+                                toggleTask={toggleTask}
+                                addTask={addTask}
+                                deleteTask={deleteTask}
+                            />
+                        )}
+                        {activeTab === 'manage' && (
+                            <ManageGoals 
+                                habits={habits}
+                                setHabits={setHabits}
+                            />
+                        )}
+                    </main>
+                </div>
+            );
+        }
+
+        // --- Monthly Habits Tracker Component ---
+        function HabitsTracker({ currentDate, setCurrentDate, habits, habitLogs, toggleHabit }) {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const daysOfMonth = getDatesOfMonth(year, month);
+            
+            const monthName = currentDate.toLocaleString('default', { month: 'long' });
+
+            // Calculate overall progress for the month
+            let totalPossible = habits.length * daysOfMonth.length;
+            let totalCompleted = 0;
+            
+            daysOfMonth.forEach(day => {
+                habits.forEach(habit => {
+                    if (habitLogs[day.dateStr]?.[habit.id]) totalCompleted++;
+                });
+            });
+            const overallProgress = totalPossible === 0 ? 0 : Math.round((totalCompleted / totalPossible) * 100);
+
+            return (
+                <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <div className="flex justify-between items-center mb-6">
+                        <div className="flex items-center space-x-4">
+                            <button onClick={() => setCurrentDate(new Date(year, month - 1, 1))} className="p-2 border rounded hover:bg-gray-100">&larr;</button>
+                            <h2 className="text-2xl font-bold text-gray-800 w-40 text-center">{monthName} {year}</h2>
+                            <button onClick={() => setCurrentDate(new Date(year, month + 1, 1))} className="p-2 border rounded hover:bg-gray-100">&rarr;</button>
+                        </div>
+                        <div className="flex flex-col items-end">
+                            <span className="text-sm text-gray-500 mb-1">Progress</span>
+                            <div className="bg-green-100 text-green-800 text-xl font-bold px-4 py-1 rounded">
+                                {overallProgress.toFixed(2)}%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="table-container overflow-x-auto border sheet-border rounded">
+                        <table className="min-w-full divide-y divide-gray-200 text-sm">
+                            <thead className="bg-gray-50">
+                                <tr>
+                                    <th className="px-4 py-3 text-left font-semibold text-gray-700 sticky left-0 bg-gray-50 z-10 w-64 sheet-border">My Habits</th>
+                                    {daysOfMonth.map(day => (
+                                        <th key={day.dayNum} className="px-2 py-2 text-center font-normal text-gray-500 w-8 sheet-border">
+                                            <div className="text-xs">{day.dow}</div>
+                                            <div className="font-semibold text-gray-800">{day.dayNum}</div>
+                                        </th>
+                                    ))}
+                                    <th className="px-4 py-3 text-center font-semibold text-gray-700 sheet-border">Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                                {habits.map((habit, index) => {
+                                    // Calculate row progress
+                                    let habitCompletions = 0;
+                                    daysOfMonth.forEach(day => {
+                                        if (habitLogs[day.dateStr]?.[habit.id]) habitCompletions++;
+                                    });
+                                    const rowProgress = Math.round((habitCompletions / daysOfMonth.length) * 100);
+
+                                    return (
+                                        <tr key={habit.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}>
+                                            <td className="px-4 py-2 whitespace-nowrap font-medium text-gray-700 sticky left-0 bg-inherit z-10 sheet-border">
+                                                {habit.name}
+                                            </td>
+                                            {daysOfMonth.map(day => (
+                                                <td key={day.dayNum} className="px-2 py-2 text-center sheet-border cursor-pointer hover:bg-gray-100" onClick={() => toggleHabit(day.dateStr, habit.id)}>
+                                                    <input 
+                                                        type="checkbox" 
+                                                        checked={!!habitLogs[day.dateStr]?.[habit.id]}
+                                                        onChange={() => {}} // Handled by td click
+                                                        className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 cursor-pointer"
+                                                    />
+                                                </td>
+                                            ))}
+                                            <td className="px-4 py-2 text-center sheet-border bg-gray-50">
+                                                <div className="w-full bg-gray-200 rounded-full h-2.5 mb-1">
+                                                    <div className="bg-green-500 h-2.5 rounded-full" style={{width: `${rowProgress}%`}}></div>
+                                                </div>
+                                                <span className="text-xs text-gray-500">{rowProgress}%</span>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                            <tfoot className="bg-gray-50">
+                                <tr>
+                                    <td className="px-4 py-4 font-semibold text-gray-700 sticky left-0 bg-gray-50 z-10 sheet-border text-right">Daily Overview</td>
+                                    {daysOfMonth.map(day => {
+                                        let dayCompletions = 0;
+                                        habits.forEach(h => {
+                                            if (habitLogs[day.dateStr]?.[h.id]) dayCompletions++;
+                                        });
+                                        const dayProgress = habits.length === 0 ? 0 : Math.round((dayCompletions / habits.length) * 100);
+                                        return (
+                                            <td key={day.dayNum} className="px-1 py-4 text-center sheet-border align-bottom h-32">
+                                                <div className="flex flex-col justify-end h-full items-center">
+                                                    <span className="text-[10px] text-gray-500 mb-1">{dayProgress}%</span>
+                                                    <div className="w-4 bg-green-400 rounded-t-sm" style={{height: `${dayProgress}%`, minHeight: '1px'}}></div>
+                                                </div>
+                                            </td>
+                                        );
+                                    })}
+                                    <td className="sheet-border bg-gray-50"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            );
+        }
+
+        // --- Weekly Planner Component ---
+        function WeeklyPlanner({ currentDate, setCurrentDate, tasks, toggleTask, addTask, deleteTask }) {
+            const weekDays = getCurrentWeek(currentDate);
+
+            const nextWeek = () => {
+                const next = new Date(currentDate);
+                next.setDate(next.getDate() + 7);
+                setCurrentDate(next);
+            };
+
+            const prevWeek = () => {
+                const prev = new Date(currentDate);
+                prev.setDate(prev.getDate() - 7);
+                setCurrentDate(prev);
+            };
+
+            return (
+                <div className="w-full">
+                    <div className="flex justify-between items-center mb-6">
+                        <h2 className="text-2xl font-bold text-gray-800">Weekly Planner</h2>
+                        <div className="flex space-x-2">
+                            <button onClick={prevWeek} className="px-4 py-2 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50">Previous Week</button>
+                            <button onClick={() => setCurrentDate(new Date())} className="px-4 py-2 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50">Current Week</button>
+                            <button onClick={nextWeek} className="px-4 py-2 bg-white border border-gray-300 rounded shadow-sm hover:bg-gray-50">Next Week</button>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-4">
+                        {weekDays.map((day, index) => {
+                            const dayTasks = tasks[day.dateStr] || [];
+                            const completedCount = dayTasks.filter(t => t.done).length;
+                            const percentage = dayTasks.length === 0 ? 0 : Math.round((completedCount / dayTasks.length) * 100);
+
+                            return (
+                                <div key={day.dateStr} className="bg-white rounded-lg shadow border border-gray-200 overflow-hidden flex flex-col">
+                                    {/* Header */}
+                                    <div className="bg-green-600 text-white p-3 text-center">
+                                        <div className="font-bold text-lg">{day.dayName}</div>
+                                        <div className="text-green-100 text-sm">{day.formattedStr}</div>
+                                    </div>
+                                    
+                                    {/* Circular Progress */}
+                                    <div className="p-4 border-b border-gray-100 flex justify-center bg-gray-50">
+                                        <svg viewBox="0 0 36 36" className="circular-chart green">
+                                          <path className="circle-bg"
+                                            d="M18 2.0845
+                                              a 15.9155 15.9155 0 0 1 0 31.831
+                                              a 15.9155 15.9155 0 0 1 0 -31.831"
+                                          />
+                                          <path className="circle"
+                                            strokeDasharray={`${percentage}, 100`}
+                                            d="M18 2.0845
+                                              a 15.9155 15.9155 0 0 1 0 31.831
+                                              a 15.9155 15.9155 0 0 1 0 -31.831"
+                                          />
+                                          <text x="18" y="20.35" className="percentage">{percentage}%</text>
+                                        </svg>
+                                    </div>
+
+                                    {/* Task List */}
+                                    <div className="p-4 flex-1 overflow-y-auto">
+                                        <h4 className="text-xs font-bold text-gray-500 uppercase mb-3">Tasks</h4>
+                                        <ul className="space-y-2 mb-4">
+                                            {dayTasks.map(task => (
+                                                <li key={task.id} className="flex items-start space-x-2 group">
+                                                    <input 
+                                                        type="checkbox" 
+                                                        checked={task.done} 
+                                                        onChange={() => toggleTask(day.dateStr, task.id)}
+                                                        className="mt-1 w-4 h-4 text-green-600 rounded focus:ring-green-500 cursor-pointer"
+                                                    />
+                                                    <span className={`flex-1 text-sm ${task.done ? 'line-through text-gray-400' : 'text-gray-700'}`}>
+                                                        {task.text}
+                                                    </span>
+                                                    <button onClick={() => deleteTask(day.dateStr, task.id)} className="text-red-400 opacity-0 group-hover:opacity-100 transition-opacity hover:text-red-600 text-xs">
+                                                        ✕
+                                                    </button>
+                                                </li>
+                                            ))}
+                                            {dayTasks.length === 0 && (
+                                                <div className="text-sm text-gray-400 italic text-center py-4">No tasks set</div>
+                                            )}
+                                        </ul>
+                                    </div>
+
+                                    {/* Add Task Input */}
+                                    <div className="p-3 bg-gray-50 border-t border-gray-200">
+                                        <input 
+                                            type="text" 
+                                            placeholder="Add a task..." 
+                                            className="w-full text-sm px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter') {
+                                                    addTask(day.dateStr, e.target.value);
+                                                    e.target.value = '';
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+        }
+
+        // --- Manage Goals Dashboard Component ---
+        function ManageGoals({ habits, setHabits }) {
+            const [newHabitName, setNewHabitName] = useState('');
+
+            const handleAdd = (e) => {
+                e.preventDefault();
+                if (!newHabitName.trim()) return;
+                const newHabit = { id: Date.now().toString(), name: newHabitName };
+                setHabits([...habits, newHabit]);
+                setNewHabitName('');
+            };
+
+            const handleDelete = (id) => {
+                if(confirm("Are you sure you want to delete this habit? All history will remain but the row will be removed.")) {
+                    setHabits(habits.filter(h => h.id !== id));
+                }
+            };
+
+            const handleUpdate = (id, newName) => {
+                setHabits(habits.map(h => h.id === id ? { ...h, name: newName } : h));
+            };
+
+            return (
+                <div className="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6">Manage Your Habits / Goals</h2>
+                    
+                    {/* Add New Habit Form */}
+                    <form onSubmit={handleAdd} className="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Create New Habit</label>
+                        <div className="flex space-x-2">
+                            <input 
+                                type="text" 
+                                value={newHabitName}
+                                onChange={(e) => setNewHabitName(e.target.value)}
+                                placeholder="e.g. Read 20 pages 📖"
+                                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                            />
+                            <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition font-medium">
+                                Add Habit
+                            </button>
+                        </div>
+                    </form>
+
+                    {/* Edit Existing Habits List */}
+                    <div className="space-y-3">
+                        <h3 className="text-lg font-semibold text-gray-700 border-b pb-2">Existing Habits</h3>
+                        {habits.map(habit => (
+                            <div key={habit.id} className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-md hover:shadow-sm transition">
+                                <input 
+                                    type="text" 
+                                    value={habit.name}
+                                    onChange={(e) => handleUpdate(habit.id, e.target.value)}
+                                    className="flex-1 px-3 py-1 mr-4 border-b border-transparent hover:border-gray-300 focus:border-green-500 focus:outline-none bg-transparent transition"
+                                />
+                                <button onClick={() => handleDelete(habit.id)} className="text-red-500 hover:text-red-700 px-3 py-1 rounded border border-red-100 hover:bg-red-50 transition text-sm">
+                                    Delete
+                                </button>
+                            </div>
+                        ))}
+                        {habits.length === 0 && (
+                            <p className="text-gray-500 italic text-center py-4">No habits defined. Add one above!</p>
+                        )}
+                    </div>
+                </div>
+            );
+        }
+
+        // Render Application
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
