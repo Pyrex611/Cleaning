@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lighthouse Cleaning Service | Professional Cleaning, Laundry & Pest Control in Jos, Plateau State</title>
+  <meta name="description" content="Lighthouse Cleaning Service provides top‑notch janitorial, post‑construction cleaning, laundry, pest control & fumigation across Plateau State, Nigeria. Spotless results, every time." />
+  <meta name="keywords" content="cleaning service Jos, laundry Jos, pest control Plateau State, fumigation Nigeria, Lighthouse Cleaning" />
+  <link rel="canonical" href="https://www.lighthousecleaning.ng/" />
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Lighthouse Cleaning Service – Jos, Plateau State" />
+  <meta property="og:description" content="Professional cleaning, laundry, and pest control you can trust. Serving Plateau State with eco‑friendly solutions." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.lighthousecleaning.ng/" />
+  <meta property="og:image" content="https://www.lighthousecleaning.ng/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lighthouse Cleaning Service – Jos, Plateau State" />
+  <meta name="twitter:description" content="Professional cleaning, laundry, and pest control. Reliable service across Plateau State." />
+  
+  <!-- GEO Tags -->
+  <meta name="geo.region" content="NG-PL" />
+  <meta name="geo.placename" content="Jos" />
+  <meta name="geo.position" content="9.8965;8.8583" />
+  <meta name="ICBM" content="9.8965, 8.8583" />
+  
+  <!-- Structured Data (JSON‑LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Lighthouse Cleaning Service",
+    "description": "Professional cleaning, laundry, pest control & fumigation in Jos, Plateau State, Nigeria.",
+    "image": "https://www.lighthousecleaning.ng/og-image.jpg",
+    "telephone": "+234-800-000-0000",
+    "email": "hello@lighthousecleaning.ng",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "15 Zaria Road",
+      "addressLocality": "Jos",
+      "addressRegion": "Plateau State",
+      "postalCode": "930001",
+      "addressCountry": "NG"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 9.8965,
+      "longitude": 8.8583
+    },
+    "url": "https://www.lighthousecleaning.ng/",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      }
+    ],
+    "areaServed": {
+      "@type": "State",
+      "name": "Plateau State"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Cleaning Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Janitorial & Post‑Construction Cleaning"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Laundry Services"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Pest Control & Fumigation"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <style>
+    /* ----- CSS Reset & Design Variables ----- */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #0A2540;
+      --navy-light: #1E3A5F;
+      --yellow: #FFC107;
+      --yellow-dark: #E0A800;
+      --white: #FFFFFF;
+      --light-bg: #F8FAFC;
+      --text-dark: #1E293B;
+      --text-light: #475569;
+      --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05);
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.02);
+      --shadow-hover: 0 25px 35px -12px rgba(0,0,0,0.12);
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 16px;
+      --max-width: 1200px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-dark);
+      background: var(--white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ----- Utility Classes ----- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--navy);
+      font-weight: 600;
+      padding: 0.9rem 2.2rem;
+      border-radius: 40px;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      cursor: pointer;
+      font-size: 1rem;
+      letter-spacing: 0.4px;
+      box-shadow: 0 8px 25px rgba(255, 193, 7, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+      transform: translateX(-100%);
+      transition: 0.5s;
+    }
+    .btn:hover::after {
+      transform: translateX(100%);
+    }
+    .btn:hover {
+      background: var(--yellow-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(255, 193, 7, 0.5);
+    }
+
+    /* ----- Header & Navigation ----- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: var(--transition);
+      padding: 1.2rem 0;
+    }
+    header.scrolled {
+      background: rgba(10, 37, 64, 0.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+      padding: 0.9rem 0;
+    }
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+    .logo svg {
+      width: 40px;
+      height: 40px;
+      transition: var(--transition);
+    }
+    nav ul {
+      display: flex;
+      gap: 2.2rem;
+    }
+    nav a {
+      color: var(--white);
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+      padding-bottom: 5px;
+      font-size: 0.95rem;
+      letter-spacing: 0.2px;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--yellow);
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 28px;
+      height: 3px;
+      background: var(--white);
+      border-radius: 3px;
+      transition: var(--transition);
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--navy);
+        padding: 6rem 2rem 2rem;
+        transition: var(--transition);
+        box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+        backdrop-filter: blur(10px);
+      }
+      nav.active { right: 0; }
+      nav ul { flex-direction: column; gap: 2rem; }
+      nav a { font-size: 1.2rem; }
+    }
+
+    /* ----- Hero Section (Full‑screen image overlay) ----- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=1470&auto=format&fit=crop')
+        center/cover no-repeat;
+      background-attachment: fixed;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,37,64,0.88) 0%, rgba(10,37,64,0.7) 60%, rgba(30,58,95,0.75) 100%);
+      z-index: 1;
+    }
+    .hero .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--white);
+      max-width: 700px;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 span {
+      color: var(--yellow);
+      position: relative;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 2.8rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero .btn {
+      padding: 0.95rem 2.5rem;
+      font-size: 1.05rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        background-attachment: scroll; /* mobile parallax fix */
+      }
+    }
+
+    /* ----- Services Section ----- */
+    .services {
+      padding: 7rem 0;
+      background: var(--light-bg);
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
+    .section-title h2 {
+      font-size: clamp(2.2rem, 5vw, 2.8rem);
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+    .section-title .underline {
+      width: 70px;
+      height: 4px;
+      background: linear-gradient(to right, var(--yellow), var(--yellow-dark));
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.8rem;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+    .card-image {
+      height: 200px;
+      overflow: hidden;
+    }
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .service-card:hover .card-image img {
+      transform: scale(1.06);
+    }
+    .card-body {
+      padding: 2rem 1.8rem 2.2rem;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-body i {
+      font-size: 2.5rem;
+      color: var(--yellow);
+      margin: -0.8rem auto 1.2rem;
+      background: rgba(255, 193, 7, 0.12);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .service-card h3 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--navy);
+    }
+    .service-card p {
+      color: var(--text-light);
+      margin-bottom: 1.4rem;
+      flex: 1;
+    }
+    .service-card ul {
+      text-align: left;
+      margin-top: 0.3rem;
+    }
+    .service-card ul li {
+      color: var(--text-light);
+      padding: 0.35rem 0;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .service-card ul li:last-child { border-bottom: none; }
+    .service-card ul li i {
+      font-size: 0.9rem;
+      color: var(--navy);
+      background: none;
+      width: auto;
+      height: auto;
+      margin: 0;
+    }
+
+    /* ----- About Section ----- */
+    .about {
+      padding: 7rem 0;
+    }
+    .about-flex {
+      display: flex;
+      align-items: center;
+      gap: 5rem;
+      flex-wrap: wrap;
+    }
+    .about-text { flex: 1 1 400px; }
+    .about-text h2 {
+      font-size: 2.5rem;
+      color: var(--navy);
+      margin-bottom: 1.6rem;
+      font-weight: 700;
+    }
+    .about-text p {
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+    .stat-card {
+      background: linear-gradient(145deg, #0A2540, #14365D);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 2.8rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      flex: 1 1 200px;
+      backdrop-filter: blur(10px);
+    }
+    .stat-card .number {
+      font-size: 3.4rem;
+      font-weight: 700;
+      color: var(--yellow);
+      line-height: 1;
+    }
+    .stat-card .label {
+      font-size: 1.1rem;
+      margin-top: 0.8rem;
+      opacity: 0.92;
+    }
+    .stat-card .rating {
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ----- Contact Section ----- */
+    .contact {
+      padding: 7rem 0;
+      background: var(--light-bg);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .contact-form {
+      background: var(--white);
+      padding: 2.8rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .contact-form h3 {
+      color: var(--navy);
+      margin-bottom: 1.8rem;
+      font-size: 1.6rem;
+    }
+    .form-group { margin-bottom: 1.4rem; }
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--text-dark);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      background: #f9fafb;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.18);
+      background: #fff;
+    }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .success-message {
+      display: none;
+      background: #d1fae5;
+      color: #065f46;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 1.2rem;
+    }
+    .map-container {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 440px;
+    }
+    iframe { width: 100%; height: 100%; border: 0; }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .map-container { min-height: 320px; }
+      .about-flex { flex-direction: column; }
+    }
+
+    /* ----- Footer ----- */
+    footer {
+      background: #0A2540;
+      color: #CBD5E1;
+      padding: 4rem 0 1.8rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-col h4 {
+      color: var(--white);
+      margin-bottom: 1rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col a { transition: var(--transition); }
+    .footer-col a:hover { color: var(--yellow); }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.8rem;
+    }
+    .social-icons a {
+      font-size: 1.4rem;
+      color: var(--white);
+      transition: var(--transition);
+    }
+    .social-icons a:hover {
+      color: var(--yellow);
+      transform: translateY(-3px);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.8rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* ----- Back to Top Button ----- */
+    #back-to-top {
+      position: fixed;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      background: var(--yellow);
+      color: var(--navy);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 8px 25px rgba(255, 193, 7, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      z-index: 900;
+    }
+    #back-to-top.visible { opacity: 1; visibility: visible; }
+    #back-to-top:hover { transform: translateY(-4px); }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="header-container">
+      <a href="#home" class="logo" aria-label="Lighthouse Cleaning Service Home">
+        <svg viewBox="0 0 40 40" width="40" height="40">
+          <rect x="14" y="10" width="12" height="22" rx="2" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1.5"/>
+          <polygon points="20,2 12,10 28,10" fill="var(--yellow)" stroke="var(--yellow)" stroke-width="1.5"/>
+          <line x1="20" y1="2" x2="20" y2="0" stroke="var(--yellow)" stroke-width="2"/>
+          <circle cx="20" cy="16" r="2" fill="var(--navy)"/>
+          <rect x="16" y="20" width="8" height="2" fill="var(--navy)"/>
+          <rect x="16" y="24" width="8" height="2" fill="var(--navy)"/>
+          <rect x="8" y="32" width="24" height="4" rx="1" fill="var(--yellow)"/>
+        </svg>
+        <span>Lighthouse</span>
+      </a>
+      <nav id="nav-menu">
+        <ul>
+          <li><a href="#home" class="active">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero with stock background image (cleaning professional scene) -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content reveal">
+          <h1>Pristine Spaces, <span>Brighter Days</span></h1>
+          <p>Jos’s most trusted cleaning, laundry, and pest control service. Eco‑friendly solutions for homes and businesses across Plateau State.</p>
+          <a href="#contact" class="btn">Get Your Free Quote</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services with card images -->
+    <section id="services" class="services">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>What We Do Best</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="services-grid">
+          <!-- Cleaning Card -->
+          <div class="service-card reveal">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=400&auto=format&fit=crop" alt="Professional cleaning in progress" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <i class="fas fa-broom"></i>
+              <h3>Cleaning</h3>
+              <p>Post‑construction, janitorial, and routine cleaning for offices and homes.</p>
+              <ul>
+                <li><i class="fas fa-check-circle"></i> Deep carpet & upholstery</li>
+                <li><i class="fas fa-check-circle"></i> Floor stripping & waxing</li>
+                <li><i class="fas fa-check-circle"></i> Window & high‑rise cleaning</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Laundry Card -->
+          <div class="service-card reveal">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?q=80&w=400&auto=format&fit=crop" alt="Fresh laundry service" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <i class="fas fa-tshirt"></i>
+              <h3>Laundry</h3>
+              <p>Wash, dry, press & fold – we handle your laundry with care.</p>
+              <ul>
+                <li><i class="fas fa-check-circle"></i> Household & bulk laundry</li>
+                <li><i class="fas fa-check-circle"></i> Hotel & guest house linen</li>
+                <li><i class="fas fa-check-circle"></i> Express service available</li>
+              </ul>
+            </div>
+          </div>
+          <!-- Pest Control Card -->
+          <div class="service-card reveal">
+            <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1585779034823-7e9ac8faec70?q=80&w=400&auto=format&fit=crop" alt="Pest control treatment" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <i class="fas fa-spray-can"></i>
+              <h3>Pest Control & Fumigation</h3>
+              <p>Eliminate pests safely with our guaranteed treatment plans.</p>
+              <ul>
+                <li><i class="fas fa-check-circle"></i> Rodent & insect control</li>
+                <li><i class="fas fa-check-circle"></i> Termite treatment</li>
+                <li><i class="fas fa-check-circle"></i> Fumigation for warehouses</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About (unchanged layout, slightly refined) -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-flex">
+          <div class="about-text reveal">
+            <h2>About Lighthouse</h2>
+            <p>We are a Plateau‑based team committed to delivering spotless environments. From post‑construction chaos to everyday mess, our trained professionals use modern equipment and eco‑friendly products to guarantee your satisfaction.</p>
+            <p>We serve all of Jos and surrounding areas, bringing the lighthouse promise: <strong>cleanliness you can count on.</strong></p>
+          </div>
+          <div class="stat-card reveal">
+            <div class="number">500+</div>
+            <div class="label">Happy Clients<br />in Plateau State</div>
+            <div class="rating">⭐ Rated 4.9/5</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact unchanged -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <div class="section-title reveal">
+          <h2>Let’s Make It Shine</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-form reveal">
+            <h3>Request a Quote</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Amina Yusuf" />
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="amina@example.com" />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+234 800 000 0000" />
+              </div>
+              <div class="form-group">
+                <label for="service">Service Interested In *</label>
+                <select id="service" name="service" required>
+                  <option value="">-- Select a service --</option>
+                  <option value="cleaning">Cleaning (Janitorial / Post‑Construction)</option>
+                  <option value="laundry">Laundry</option>
+                  <option value="pest-control">Pest Control & Fumigation</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us about your needs..."></textarea>
+              </div>
+              <button type="submit" class="btn">Send Enquiry</button>
+              <div class="success-message" id="formSuccess">✅ Thank you! We’ll get back to you within 24 hours.</div>
+            </form>
+          </div>
+          <div class="map-container reveal">
+            <iframe
+              title="Lighthouse Cleaning Service location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.637598075223!2d8.8559!3d9.8965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1053756b8b1c5f6f%3A0xd8c0b2c27e7e0e0e!2sZaria%20Road%2C%20Jos!5e0!3m2!1sen!2sng!4v1717000000000"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Lighthouse Cleaning</h4>
+          <p>15 Zaria Road, Jos<br />Plateau State, Nigeria</p>
+          <p>📞 +234 800 000 0000</p>
+          <p>✉️ hello@lighthousecleaning.ng</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Lighthouse Cleaning Service. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top">↑</button>
+
+  <script>
+    (function() {
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 80) {
+          header.classList.add('scrolled');
+          backToTop.classList.add('visible');
+        } else {
+          header.classList.remove('scrolled');
+          backToTop.classList.remove('visible');
+        }
+      });
+
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('nav-menu');
+      hamburger.addEventListener('click', () => {
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+        hamburger.setAttribute('aria-expanded', !expanded);
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      });
+
+      document.querySelectorAll('#nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navMenu.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('#nav-menu a');
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      const revealElements = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+          }
+        });
+      }, { threshold: 0.15 });
+      revealElements.forEach(el => observer.observe(el));
+
+      const form = document.getElementById('contactForm');
+      const successMsg = document.getElementById('formSuccess');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        successMsg.style.display = 'block';
+        form.reset();
+        setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+      });
+
+      window.addEventListener('load', () => {
+        document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('active'));
+      });
+    })();
+  </script>
+</body>
+</html>
